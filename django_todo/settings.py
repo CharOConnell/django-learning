@@ -28,7 +28,8 @@ SECRET_KEY = 'jefe329jovy57rj#$z8c82(bz#q7e37ujp57ftmye5ymn2endq'
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-d6f58ebe-60f3-473c-a1e1-13ea082cc858.ws-eu01.gitpod.io',
-                '8080-d6f58ebe-60f3-473c-a1e1-13ea082cc858.ws-eu01.gitpod.io']
+                '8080-d6f58ebe-60f3-473c-a1e1-13ea082cc858.ws-eu01.gitpod.io',
+                'https://simple-char-django-todo.herokuapp.com']
 
 
 # Application definition
