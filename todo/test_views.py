@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.shortcuts import get_object_or_404
 from .models import Item
 
 
@@ -30,3 +31,8 @@ class TestViews(TestCase):
         self.assertEqual(page.status_code, 404)
         # check that if it doesn't exist, it throws up the 404
         # we used the get_object_or_404
+
+    def test_post_create_an_item(self):
+        response = self.client.post("/add", {"name": "Create a Test"})
+        item = get_object_or_404(Item, pk=1)
+        self.assertEqual(item.done, False)
