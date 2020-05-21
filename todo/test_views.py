@@ -34,5 +34,34 @@ class TestViews(TestCase):
 
     def test_post_create_an_item(self):
         response = self.client.post("/add", {"name": "Create a Test"})
+        # create a response from a form posted to add, 
+        # dictionary passed through
         item = get_object_or_404(Item, pk=1)
+        # make sure our get_object_or_404 is working
         self.assertEqual(item.done, False)
+
+    def test_post_edit_an_item(self):
+        item = Item(name="Createa Test")
+        # create new item
+        item.save()
+        id = item.id
+        # store the id of that item
+
+        response = self.client.post("/edit/{0}".format(id), {"name": "A different name"})
+        # pass in the id value
+        item = get_object_or_404(Item, pk=id)
+        # check get_object_or_404 is working
+
+        self.assertEqual("A different name", item.name)
+
+    def test_toggle_status(self):
+        item = Item(name="Create a Test")
+        item.save()
+        id = item.id
+
+        response = self.client.post("/toggle/{0}".format(id))
+
+        item = get_object_or_404(Item, pk=id)
+        self.assertEqual(item.done, True)
+        # we don't set it so it's false, but when we run it, 
+        # it'll change to true
