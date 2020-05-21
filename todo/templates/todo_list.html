@@ -11,15 +11,16 @@
 
 
     <table>
+        {% for item in items %}
         <tr>
-            <td><strike>Plan Website</strike></td>
+            {% if item.done %}
+            <td><strike>{{item.name}}</strike></td>
+            {% else %}
+            <td>{{item.name}}</td>
+            {% endif %}
         </tr>
-        <tr>
-            <td>Create Website</td>
-        </tr>
-        <tr>
-            <td>Launch Website</td>
-        </tr>
+        {% endfor %}
+
     </table>
 </body>
 </html>
