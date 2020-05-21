@@ -1,10 +1,16 @@
 from django.test import TestCase
+from .forms import ItemForm
 
 
 # Create your tests here.
-class TestDjango(TestCase):
+class TestToDoItemForm(TestCase):
 
-    def test_is_this_thing_on(self):
-        # need to start with test or django won't find them
-        self.assertEqual(1, 1)
-        # asserts that 1 is equal to 0
+    def test_can_create_an_item_with_just_a_name(self):
+        form = ItemForm({'name': 'Create Tests'})
+        self.assertTrue(form.is_valid())
+
+    def test_correct_message_for_missing_name(self):
+        form = ItemForm({'name': ''})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['name'], [u'This field is required.'])
+        # looks for an exact match if it fails
